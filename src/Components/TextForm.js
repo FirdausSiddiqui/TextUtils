@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 
-export default function TextForm(){
+export default function TextForm(props){
 
     const [text ,setText] =useState("");
-    const [mode ,setMode]=useState({           
-        color:"black",
-        backgroundColor:"white"
-    });
-    const [modeButton,setModeButton]=useState("Enable Dark Mode");
+   
+   
 
     function changeHandler(event){
         const t=event.target.value;
@@ -27,24 +24,6 @@ export default function TextForm(){
         setText("")
     }
  
-    function handleMode(){
-        if(mode.color==="white"){
-            setMode({
-                color:"black",
-                backgroundColor:"white"
-            });
-            setModeButton("Enable Dark Mode");
-        }
-        if(mode.color==="black"){
-            setMode({
-                color:"white",
-                backgroundColor:"black"
-            });
-            setModeButton("Enable Light Mode");
-
-        }
-    }
-
     function copyText(){
         let data = document.getElementById("mybox");
         data.select();
@@ -61,19 +40,26 @@ export default function TextForm(){
         
     }
 
+    // const [mode,setMode] =useState({backgroundColor:"white",color:"black"});
+    // if(props.theme==="light"){
+    //     setMode({backgroundColor:"black",color:"white"});
+    // }else{
+    //     setMode({backgroundColor:"black",color:"white"});
+    // }
+
     
 
     return(      
-        <div  className="container" style={mode}>           
-            <div className="my-3  container" style={mode}>    
+        <div  className="container" >           
+            <div className="my-3  container" >    
                 <h1 className="Heading">Enter Text To Analyze</h1>       
-                <textarea className="form-control" id="mybox" value={text} onChange={changeHandler} rows="8" />
+                <textarea className="form-control" id="mybox" style={{backgroundColor:props.mode==="light"?"white":"black",color:props.mode==="light"?"black":"white"}}value={text} onChange={changeHandler} rows="8" />
                 <button type="button" className="btn btn-primary m-2" onClick={handleClick}>Convert To Uppercase</button>
                 <button type="button" className="btn btn-primary m-2" onClick={handleLower}>Convert To Lowercase</button>
                 <button type="button" className="btn btn-primary m-2" onClick={handleReset}>Clear Text</button>      
                 <button type="button" className="btn btn-primary m-2" onClick={copyText}>Copy Text</button>
                 <button type="button" className="btn btn-primary m-2" onClick={removeSpaces}>Remove Extra Space</button>
-                <button type="button" className="btn btn-primary m-2" onClick={handleMode}>{modeButton}</button>
+                
             </div>
             <div className="container my-3">
                 <h2>Your text summary here</h2>
