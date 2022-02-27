@@ -15,19 +15,23 @@ export default function TextForm(props){
     function handleClick(){
         const upperText = text.toUpperCase();
         setText(upperText);
+        props.showAlert("Succesfully Converted to UpperCase","success");
     }
     function handleLower(){
         const upperText = text.toLowerCase();
         setText(upperText);
+        props.showAlert("Succesfully Converted to LowerCase","success");
     }
     function handleReset(){
-        setText("")
+        setText("");
+        props.showAlert("Text Has been cleared Successfully !","success");
     }
  
     function copyText(){
         let data = document.getElementById("mybox");
         data.select();
         navigator.clipboard.writeText(data.value);
+        props.showAlert("Succesfully Copied the Text","success");
 
     }
     function removeSpaces(){
@@ -36,18 +40,10 @@ export default function TextForm(props){
         
         const newString = text.split(/[ ]+/);
         setText(newString.join(" "));
-        
-        
+        props.showAlert("Succesfully Removed The Extra Spaces","success");   
+
     }
 
-    // const [mode,setMode] =useState({backgroundColor:"white",color:"black"});
-    // if(props.theme==="light"){
-    //     setMode({backgroundColor:"black",color:"white"});
-    // }else{
-    //     setMode({backgroundColor:"black",color:"white"});
-    // }
-
-    
 
     return(      
         <div  className="container" >           
